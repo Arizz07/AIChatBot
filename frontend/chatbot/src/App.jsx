@@ -21,7 +21,7 @@ function App() {
     setInput('')
     setLoading(true)
     try{
-      const response = await fetch('https://aichatbot-kj10.onrender.comapi/chat',{
+      const response = await fetch('https://aichatbot-kj10.onrender.com/api/chat',{
         method:"POST",
         headers:{
           "Content-Type":"application/json"
