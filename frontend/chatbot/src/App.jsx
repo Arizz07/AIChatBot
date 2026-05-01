@@ -2,12 +2,18 @@ import React from 'react'
 import Header from './Components/Header'
 import Chat from './Components/Chat'
 import Conversation from './Components/Conversation'
-import { useState } from 'react'
+import { useState,useRef,useEffect } from 'react'
 
 function App() {
   const [messages, setMessages] = useState([])
   const [input,setInput] = useState('')
   const [loading,setLoading] = useState(false)
+
+   const bottomRef = useRef(null)
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, loading])
 
   const sendMessages = async ()=>{
     if(!input.trim()) return
@@ -36,15 +42,17 @@ function App() {
   
   return (
    <>
-   <div className="flex-1">
+   <div className="flex-1 h-screen">
     <Header />
-   </div>
-    <div className="flex-1 max-h-full">
+   
+    <div className="flex-1 overflow-y-auto pt-16 pb-16">
     <Conversation messages={messages} loading={loading} />
+    <div ref={bottomRef} /> 
    </div>
    <div className="flex-1">
     <Chat input={input} setInput={setInput} sendMessages={sendMessages} />
    </div>
+    </div>
   
    </>
   )
