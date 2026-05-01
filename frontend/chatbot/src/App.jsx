@@ -30,7 +30,6 @@ function App() {
 
         })
         const data = await response.json()
-        console.log('Received response:', data);
         setMessages(prev=>[...prev,{role:'ai',text:data.reply}])
         setLoading(false)
 
